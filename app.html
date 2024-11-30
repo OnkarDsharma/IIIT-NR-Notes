@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIITNR NOTES</title>
+    <link rel="stylesheet" href="./appDemo.css">
+</head>
+
+<body>
+    <header class="header">
+        <!--Navigation Bar-->
+        <nav class="navBar">
+            <img src="./img/logo.png" alt="IIITNR" class="logo">
+            <div class="navItems">
+                <a href="index.html" class="hyperlink">Home</a>
+                <a href="#" class="hyperlink">FAQ</a>
+                <a href="#" class="hyperlink">About US</a>
+                <button class="hyperlinkButton"><a href="app.html">Explore Notes</a></button>
+            </div>
+        </nav>
+
+    </header>
+
+    <!-- Search input box -->
+    <input type="text" id="searchInput" onkeyup="searchNotes()" placeholder="Search notes by subject or tags...">
+
+    <!-- Dropdown filter for subjects -->
+    <label class="filter-label" for="subjectFilter">Filter by Subject:</label>
+    <select id="subjectFilter" onchange="searchNotes()">
+        <option value="">All Subjects</option>
+        <option value="Math">Math</option>
+        <option value="Physics">Physics</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="English">English</option>
+        <option value="Environmental Engineering">Environmental Engineering</option>
+        <option value="Human Values">Human Values</option>
+        <!-- Add more subjects as needed -->
+    </select>
+
+    <!-- Notes list -->
+    <div id="notesContainer">
+        <!-- Digital Logic Design -->
+        <div class="note" data-subject="Physics" data-tags="physics dld digital logic design signal signals">
+            <a href="https://drive.google.com/file/d/1AnfTjYS2sFxFG_LMSmCQ8otVjMDxrNl8/view?usp=drive_link" target="_blank">
+                Digital Logic Design
+            </a>
+        </div>
+
+        <!-- Discrete Mathematics -->
+        <div class="note" data-subject="Math" data-tags="DM Discrete Mathematics">
+            <a href="https://drive.google.com/file/d/1Jam_kQxubfDCnERnHhs87BbswjfZpxo6/view?usp=drive_link" target="_blank">
+                Discrete Mathematics
+            </a>
+        </div>
+
+        <!-- Linear Algebra and Matrix Analysis -->
+        <div class="note" data-subject="Math" data-tags="LAMA Linear Algebra and Matrix Analysis">
+            <a href="https://drive.google.com/file/d/14t2x-8_rXd3N92l6FCv43j7XDPFB7fqU/view?usp=drive_link" target="_blank">
+                Linear Algebra and Matrix Analysis
+            </a>
+        </div>
+
+        <!-- Probability and Statistics -->
+        <div class="note" data-subject="Math" data-tags="Probability and Statistics">
+            <a href="https://drive.google.com/file/d/1MQF-GnN8RacUL0URkTtKrWMJUo8mIO-L/view?usp=drive_link" target="_blank">
+                Probability and Statistics
+            </a>
+        </div>
+
+        <!-- Introduction to programming -->
+        <div class="note" data-subject="Computer Science" data-tags="Introduction to programming ITP">
+            <a href="https://drive.google.com/file/d/1g13QKwHnl80rr9lffS_QQ09GsbM0B0zH/view?usp=drive_link" target="_blank">
+                Introduction to programming
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        function searchNotes() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const subjectFilter = document.getElementById("subjectFilter").value.toLowerCase();
+            const notes = document.getElementsByClassName("note");
+
+            for (let i = 0; i < notes.length; i++) {
+                const subject = notes[i].getAttribute("data-subject").toLowerCase();
+                const tags = notes[i].getAttribute("data-tags").toLowerCase();
+
+                // Display note if it matches the search query and selected subject
+                if ((subject.includes(input) || tags.includes(input)) &&
+                    (subjectFilter === "" || subject === subjectFilter)) {
+                    notes[i].style.display = "";
+                } else {
+                    notes[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="./appDemo.css">
+</head>
+
+<body>
+    <header class="header">
+        <!--Navigation Bar-->
+        <nav class="navBar">
+            <img src="./img/logo.png" alt="IIITNR" class="logo">
+            <div class="navItems">
+                <a href="test.html" class="hyperlink">Home</a>
+                <a href="#" class="hyperlink">FAQ</a>
+                <a href="#" class="hyperlink">About US</a>
+                <button class="hyperlinkButton"><a href="app.html">Explore Notes</a></button>
+            </div>
+        </nav>
+
+    </header>
+
+    <!-- Search input box -->
+    <input type="text" id="searchInput" onkeyup="searchNotes()" placeholder="Search notes by subject or tags...">
+
+    <!-- Dropdown filter for subjects -->
+    <label class="filter-label" for="subjectFilter">Filter by Subject:</label>
+    <select id="subjectFilter" onchange="searchNotes()">
+        <option value="">All Subjects</option>
+        <option value="Math">Math</option>
+        <option value="Physics">Physics</option>
+        <!-- Add more subjects as needed -->
+    </select>
+
+    <!-- Notes list -->
+    <div id="notesContainer">
+        <!-- Example note 1 -->
+        <div class="note" data-subject="Math" data-tags="algebra calculus">
+            <a href="https://drive.google.com/file/d/your-math-note-id/view" target="_blank">
+                Math - Algebra & Calculus Notes
+            </a>
+        </div>
+
+        <!-- Example note 2 -->
+        <div class="note" data-subject="Physics" data-tags="mechanics optics">
+            <a href="https://drive.google.com/file/d/your-physics-note-id/view" target="_blank">
+                Physics - Mechanics & Optics Notes
+            </a>
+        </div>
+
+        <!-- Example note 3 -->
+        <div class="note" data-subject="Chemistry" data-tags="organic inorganic">
+            <a href="https://drive.google.com/file/d/your-chemistry-note-id/view" target="_blank">
+                Chemistry - Organic & Inorganic Notes
+            </a>
+        </div>
+        <!-- Add more notes here with relevant subjects and tags -->
+    </div>
+
+    <script>
+        function searchNotes() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const subjectFilter = document.getElementById("subjectFilter").value.toLowerCase();
+            const notes = document.getElementsByClassName("note");
+
+            for (let i = 0; i < notes.length; i++) {
+                const subject = notes[i].getAttribute("data-subject").toLowerCase();
+                const tags = notes[i].getAttribute("data-tags").toLowerCase();
+
+                // Display note if it matches the search query and selected subject
+                if ((subject.includes(input) || tags.includes(input)) &&
+                    (subjectFilter === "" || subject === subjectFilter)) {
+                    notes[i].style.display = "";
+                } else {
+                    notes[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
